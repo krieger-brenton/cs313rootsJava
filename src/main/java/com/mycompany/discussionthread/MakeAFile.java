@@ -45,14 +45,10 @@ public class MakeAFile extends HttpServlet {
         {
             dataDirectory = "userInfo.txt";
         }
-        if (request.getParameter("comment") != null)
-        {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(dataDirectory, true));
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy 'at' HH:mm:ss");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(dataDirectory, false));
             writer.write("Brent,test" + "\n");
             writer.write("Burton,test" + "\n");
             writer.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
