@@ -42,6 +42,17 @@ public class validate extends HttpServlet {
         String password = request.getParameter("password");        
         
         //filereader from userInfo
+        
+        String dataDirectory = System.getenv("OPENSHIFT_DATA_DIR");
+        if (dataDirectory != null)
+        {
+            dataDirectory += "/userInfo.txt";
+        }
+        else
+        {
+            dataDirectory = "userInfo.txt";
+        }
+        
         UserFileHandler UFH = new UserFileHandler("userInfo.txt");
         List<User> users = UFH.getUsers();
         boolean found = false;

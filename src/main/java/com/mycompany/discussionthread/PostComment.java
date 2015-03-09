@@ -40,9 +40,18 @@ public class PostComment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        String dataDirectory = System.getenv("OPENSHIFT_DATA_DIR");
+        if (dataDirectory != null)
+        {
+            dataDirectory += "/commentInfo.txt";
+        }
+        else
+        {
+            dataDirectory = "commentInfo.txt";
+        }
         if (request.getParameter("comment") != null)
         {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("commentInfo.txt", true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(dataDirectory, true));
             Comment comment = new Comment(request.getParameter("comment"), (String)request.getSession().getAttribute("name"));
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy 'at' HH:mm:ss");
             writer.write(comment.getComment() + "/endC" + comment.getUser() + "/endC" + sdf.format(comment.getDate()) + "\n");
@@ -53,7 +62,7 @@ public class PostComment extends HttpServlet {
         List<Comment> comments = new ArrayList<Comment>();
         try
         {
-            BufferedReader reader = new BufferedReader(new FileReader("commentInfo.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(dataDirectory));
             String line;
             
             while ((line = reader.readLine()) != null) 
