@@ -41,7 +41,7 @@ public class MakeAFile extends HttpServlet {
         String dataDirectory = System.getenv("OPENSHIFT_DATA_DIR");
         if (dataDirectory != null)
         {
-            dataDirectory += "/userInfo.txt";
+            dataDirectory += "userInfo.txt";
         }
         else
         {
