@@ -63,8 +63,9 @@ public class validate extends HttpServlet {
             {
                 request.getSession().setAttribute("name", name);
                 request.getSession().setAttribute("password", password);
-                
+                found = true;
                 request.getRequestDispatcher("NewPost.jsp").forward(request, response);
+                return;
             }
         }
          
